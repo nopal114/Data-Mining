@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peta Klaster IPM Indonesia 2024</title>
+<style>
+  :root{
+    --paper:#EDE7D3;
+    --paper-2:#E2D9BC;
+    --panel:#F7F3E6;
+    --ink:#1F2A44;
+    --ink-soft:#5B6478;
+    --ink-faint:#8B8873;
+    --line:#C9BE9C;
+    --line-soft:#DAD1B2;
+    --accent:#B9812E;
+    --accent-ink:#7A5620;
+    --good:#3E7A82;
+    --white:#FFFDF7;
+    --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(1200px 500px at 15% -10%, rgba(185,129,46,0.10), transparent 60%),
+      radial-gradient(900px 500px at 105% 10%, rgba(63,88,120,0.10), transparent 60%);
+    color:var(--ink);
+    font-family:var(--font-body);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:44px 28px 80px;}
+
+  /* ---------- Header ---------- */
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--accent);display:inline-block;}
+  h1{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:clamp(30px,4.4vw,50px);
+    line-height:1.06;
+    margin:0 0 18px;
+    letter-spacing:-0.01em;
+    max-width:16ch;
+  }
+  h1 em{font-style:italic;color:var(--accent-ink);}
+  .lead{
+    max-width:62ch;
+    font-size:16px;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+  }
+  .lead strong{color:var(--ink);font-weight:600;}
+  .source-note{
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    color:var(--ink-faint);
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid var(--line-soft);
+  }
+
+  /* ---------- Panel shell ---------- */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:2px;
+    box-shadow:0 1px 0 rgba(31,42,68,0.04);
+  }
+  .section-label{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:38px 0 10px;
+    display:flex;align-items:baseline;gap:8px;
+  }
+  .section-label .num{color:var(--accent-ink);}
+
+  /* ---------- Controls ---------- */
+  .controls{
+    padding:20px 22px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px 32px;
+    align-items:center;
+    margin-top:30px;
+  }
+  .control-group{display:flex;flex-direction:column;gap:7px;}
+  .control-title{
+    font-family:var(--font-mono);
+    font-size:10.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+  .segmented{
+    display:inline-flex;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:3px;
+  }
+  .segmented button{
+    border:none;background:transparent;
+    font-family:var(--font-body);
+    font-size:13.5px;
+    padding:7px 16px;
+    border-radius:16px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    font-weight:500;
+    transition:background .15s ease, color .15s ease;
+  }
+  .segmented button.active{
+    background:var(--ink);
+    color:var(--white);
+  }
+  .k-control{display:flex;align-items:center;gap:12px;}
+  .k-control input[type=range]{
+    -webkit-appearance:none;
+    width:180px;height:3px;
+    background:var(--line);
+    border-radius:3px;
+    outline:none;
+  }
+  .k-control input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:16px;height:16px;border-radius:50%;
+    background:var(--accent);
+    border:2px solid var(--white);
+    box-shadow:0 0 0 1px var(--accent);
+    cursor:pointer;
+    margin-top:-6.5px;
+  }
+  .k-control input[type=range]::-webkit-slider-runnable-track{height:3px;border-radius:3px;background:var(--line);}
+  .k-control input[type=range]::-moz-range-thumb{
+    width:14px;height:14px;border-radius:50%;background:var(--accent);border:2px solid var(--white);cursor:pointer;
+  }
+  .k-value{
+    font-family:var(--font-mono);
+    font-size:18px;
+    color:var(--ink);
+    min-width:18px;
+    text-align:center;
+    font-weight:600;
+  }
+  .search-box{position:relative;}
+  .search-box input{
+    font-family:var(--font-body);
+    font-size:13.5px;
+    padding:8px 12px 8px 30px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--white);
+    color:var(--ink);
+    width:190px;
+    outline:none;
+  }
+  .search-box input:focus{border-color:var(--accent);}
+  .search-box svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);opacity:.45;}
+  .quality-readout{
+    margin-left:auto;
+    display:flex;align-items:center;gap:10px;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .quality-dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .quality-readout b{color:var(--ink);font-family:var(--font-mono);}
+
+  /* ---------- Chart panel ---------- */
+  .chart-panel{padding:22px 22px 8px;margin-top:14px;}
+  .chart-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .chart-title{font-family:var(--font-display);font-size:19px;}
+  .chart-sub{font-size:12.5px;color:var(--ink-faint);max-width:52ch;}
+  svg.chart{width:100%;height:auto;display:block;}
+  .legend-inline{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-soft);margin:6px 0 14px;font-family:var(--font-mono);}
+  .legend-inline span{display:inline-flex;align-items:center;gap:6px;}
+  .legend-inline i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+  .legend-inline .nasional-mark{width:2px;height:11px;border-radius:0;background:var(--accent-ink);}
+
+  /* ---------- Cluster cards ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+    margin-top:12px;
+  }
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-left:4px solid var(--card-color, var(--ink));
+    border-radius:2px;
+    padding:14px 16px;
+    cursor:pointer;
+    transition:box-shadow .15s ease, transform .1s ease;
+  }
+  .card:hover{box-shadow:0 3px 12px rgba(31,42,68,0.10);}
+  .card.active{outline:2px solid var(--card-color, var(--ink));outline-offset:-1px;}
+  .card-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+  .card-name{font-family:var(--font-display);font-size:16px;}
+  .card-tag{
+    font-family:var(--font-mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--white);background:var(--card-color,var(--ink));
+    padding:2px 7px;border-radius:10px;
+  }
+  .card-stat-row{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-soft);margin-top:5px;}
+  .card-stat-row b{color:var(--ink);font-family:var(--font-mono);font-weight:600;}
+  .card-extremes{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line-soft);font-size:11.5px;color:var(--ink-faint);}
+  .card-extremes div{display:flex;justify-content:space-between;gap:8px;margin-top:2px;}
+  .card-extremes b{color:var(--ink-soft);font-weight:600;}
+
+  .filter-chip{
+    display:none;
+    align-items:center;gap:8px;
+    font-size:12.5px;color:var(--ink-soft);
+    margin-top:12px;
+  }
+  .filter-chip.show{display:inline-flex;}
+  .filter-chip button{
+    border:1px solid var(--line);background:var(--white);border-radius:12px;
+    padding:2px 10px;cursor:pointer;font-size:12px;color:var(--ink);
+  }
+
+  /* ---------- Elbow mini chart ---------- */
+  .elbow-panel{padding:20px 22px;margin-top:8px;}
+  .elbow-row{display:flex;gap:26px;align-items:center;flex-wrap:wrap;}
+  .elbow-row svg{flex:1 1 320px;min-width:260px;}
+  .elbow-note{flex:1 1 260px;font-size:12.5px;color:var(--ink-soft);max-width:40ch;}
+  .elbow-note b{color:var(--ink);}
+
+  /* ---------- Table ---------- */
+  .table-panel{margin-top:8px;padding:20px 22px 22px;}
+  .table-toolbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;}
+  .table-count{font-size:12.5px;color:var(--ink-faint);font-family:var(--font-mono);}
+  .btn-export{
+    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;
+    border:1px solid var(--ink);background:var(--ink);color:var(--white);
+    padding:7px 14px;border-radius:16px;cursor:pointer;
+  }
+  .btn-export:hover{background:var(--accent-ink);border-color:var(--accent-ink);}
+  .table-scroll{max-height:520px;overflow-y:auto;border:1px solid var(--line);border-radius:2px;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--white);}
+  thead th{
+    position:sticky;top:0;
+    background:var(--paper-2);
+    text-align:left;
+    font-family:var(--font-mono);
+    font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:10px 14px;
+    cursor:pointer;
+    border-bottom:1px solid var(--line);
+    user-select:none;
+    white-space:nowrap;
+  }
+  thead th:hover{color:var(--ink);}
+  thead th .arrow{opacity:.5;font-size:9px;margin-left:3px;}
+  tbody td{padding:8px 14px;border-bottom:1px solid var(--line-soft);}
+  tbody tr:hover{background:var(--paper);}
+  tbody tr.dim{opacity:.32;}
+  td.num{font-family:var(--font-mono);text-align:right;font-weight:600;}
+  td.badge-cell{text-align:left;}
+  .row-badge{
+    display:inline-block;padding:2px 9px;border-radius:10px;
+    font-family:var(--font-mono);font-size:10.5px;color:var(--white);
+    background:var(--row-color,var(--ink));
+  }
+  .cat-tag{font-size:11.5px;color:var(--ink-faint);}
+  .empty-row td{text-align:center;color:var(--ink-faint);padding:30px;font-style:italic;}
+
+  /* ---------- Footer ---------- */
+  footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);}
+  footer .foot-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:34px;}
+  footer h3{font-family:var(--font-display);font-weight:400;font-size:15px;margin:0 0 8px;}
+  footer p{font-size:12.5px;color:var(--ink-soft);margin:0 0 8px;}
+  footer .pipeline{
+    font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);
+    display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px;
+  }
+  footer .pipeline span.step{background:var(--paper-2);border:1px solid var(--line);padding:3px 9px;border-radius:10px;}
+  footer .pipeline span.sep{color:var(--line);}
+
+  @media (max-width:720px){
+    .wrap{padding:30px 16px 60px;}
+    footer .foot-grid{grid-template-columns:1fr;}
+    .quality-readout{margin-left:0;width:100%;}
+    .k-control input[type=range]{width:130px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Data Mining · k&#8209;Means · BPS IPM 2024</div>
+  <h1>Peta klaster pembangunan manusia <em>Indonesia</em></h1>
+  <p class="lead">
+    <strong>553 wilayah</strong> — 38 provinsi dan 514 kabupaten/kota — dikelompokkan berdasarkan skor
+    Indeks Pembangunan Manusia (IPM) 2024 memakai algoritma <strong>k&#8209;Means</strong>. Geser jumlah
+    klaster untuk melihat bagaimana peta ini terbentuk ulang, atau telusuri tiap wilayah pada tabel di bawah.
+  </p>
+  <div class="source-note">SUMBER DATA — IPM_2024_clean.xlsx (BPS) &nbsp;·&nbsp; ALUR ANALISIS DIADAPTASI DARI WORKFLOW ORANGE DATA MINING (IPM.ows)</div>
+
+  <div class="section-label"><span class="num">01</span> Kontrol klaster</div>
+  <div class="panel controls">
+    <div class="control-group">
+      <span class="control-title">Cakupan wilayah</span>
+      <div class="segmented" id="levelToggle">
+        <button data-level="kabkota" class="active">Kabupaten/Kota <span style="opacity:.55">(514)</span></button>
+        <button data-level="provinsi">Provinsi <span style="opacity:.55">(38)</span></button>
+      </div>
+    </div>
+    <div class="control-group">
+      <span class="control-title">Jumlah klaster (k)</span>
+      <div class="k-control">
+        <input type="range" id="kSlider" min="2" max="8" value="4" step="1">
+        <span class="k-value" id="kValue">4</span>
+      </div>
+    </div>
+    <div class="control-group">
+      <span class="control-title">Cari wilayah</span>
+      <div class="search-box">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#1F2A44" stroke-width="2"/><line x1="16.4" y1="16.4" x2="21" y2="21" stroke="#1F2A44" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="text" id="searchInput" placeholder="mis. Jakarta, Nias…">
+      </div>
+    </div>
+    <div class="quality-readout">
+      <span class="quality-dot" id="qualityDot"></span>
+      Kualitas klaster: <b id="qualityLabel">–</b>
+      <span style="color:var(--ink-faint)">(silhouette&nbsp;<b id="qualityScore">–</b>)</span>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="num">02</span> Sebaran skor IPM &amp; batas klaster</div>
+  <div class="panel chart-panel">
+    <div class="chart-head">
+      <div>
+        <div class="chart-title" id="chartTitle">Sebaran 514 kabupaten/kota</div>
+        <div class="chart-sub">Setiap titik satu wilayah, diposisikan sesuai skor IPM-nya dan diwarnai menurut klaster. Baris di bawah menunjukkan sebaran (min–kuartil–median–kuartil–maks) tiap klaster pada sumbu yang sama.</div>
+      </div>
+    </div>
+    <div id="chartHost"></div>
+    <div class="legend-inline" id="legendHost"></div>
+  </div>
+
+  <div class="section-label"><span class="num">03</span> Ringkasan klaster</div>
+  <div class="cards" id="cardsHost"></div>
+  <div class="filter-chip" id="filterChip">
+    Tabel disaring ke <b id="filterChipLabel"></b>
+    <button id="filterChipClear">Hapus filter ✕</button>
+  </div>
+
+  <div class="section-label"><span class="num">04</span> Memilih k — bantuan silhouette</div>
+  <div class="panel elbow-panel">
+    <div class="elbow-row">
+      <svg class="chart" id="elbowChart" viewBox="0 0 520 150"></svg>
+      <div class="elbow-note">
+        Skor <b>silhouette</b> mengukur seberapa rapat wilayah dalam satu klaster dibanding klaster tetangga
+        terdekatnya (rentang &minus;1 hingga 1; makin tinggi makin baik pemisahannya). Titik yang disorot
+        menandai nilai <i>k</i> yang sedang dipakai — bukan berarti k tertinggi selalu paling berguna secara
+        analitis, tapi ini membantu menghindari klaster yang tumpang tindih.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label"><span class="num">05</span> Data wilayah</div>
+  <div class="panel table-panel">
+    <div class="table-toolbar">
+      <span class="table-count" id="tableCount">—</span>
+      <button class="btn-export" id="exportBtn">↓ Ekspor CSV</button>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th data-key="n">Wilayah <span class="arrow" id="arrow-n"></span></th>
+            <th data-key="v">IPM 2024 <span class="arrow" id="arrow-v">▼</span></th>
+            <th data-key="c">Klaster <span class="arrow" id="arrow-c"></span></th>
+            <th data-key="cat">Kategori BPS <span class="arrow" id="arrow-cat"></span></th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <div class="foot-grid">
+      <div>
+        <h3>Metodologi</h3>
+        <p>
+          Klasterisasi memakai <b>k&#8209;Means 1 dimensi</b> (satu variabel: skor IPM), diinisialisasi dari
+          kuantil data, diiterasi hingga konvergen, lalu klaster diurutkan naik menurut nilai pusatnya sehingga
+          label klaster selalu berjalan dari IPM terendah ke tertinggi. Provinsi dan kabupaten/kota diklaster
+          <b>terpisah</b> karena keduanya berada pada skala administratif berbeda. Garis emas menandai IPM
+          Nasional 2024 (74,20) sebagai acuan, dan garis putus&#8209;putus menandai batas antar klaster.
+        </p>
+        <p>Kategori BPS (Sangat Tinggi ≥80, Tinggi 70–79,99, Sedang 60–69,99, Rendah &lt;60) ditampilkan sebagai
+          pembanding terhadap klaster hasil k&#8209;Means — keduanya tidak selalu sama karena BPS memakai ambang
+          tetap, sedangkan k&#8209;Means mengikuti struktur data.</p>
+        <div class="pipeline">
+          <span class="step">File</span><span class="sep">→</span>
+          <span class="step">Select Rows</span><span class="sep">→</span>
+          <span class="step">k&#8209;Means</span><span class="sep">→</span>
+          <span class="step">Silhouette Plot</span><span class="sep">→</span>
+          <span class="step">Box Plot</span><span class="sep">→</span>
+          <span class="step">Scatter Plot</span><span class="sep">→</span>
+          <span class="step">Pivot Table</span>
+        </div>
+      </div>
+      <div>
+        <h3>Tentang berkas ini</h3>
+        <p>Dashboard ini satu berkas HTML mandiri — semua data, perhitungan k&#8209;Means, dan grafik berjalan
+          langsung di peramban tanpa koneksi internet, server, atau pustaka eksternal. Bisa dibuka ulang kapan
+          saja secara luring.</p>
+        <p style="color:var(--ink-faint)">Diadaptasi dari alur kerja Orange Data Mining (IPM.ows) atas berkas
+          IPM_2024_clean.xlsx.</p>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* =========================================================
+   DATA
+   ========================================================= */
+const DATA = {"nasional": 74.2, "provinsi": [{"n": "ACEH", "v": 74.03}, {"n": "SUMATERA UTARA", "v": 74.02}, {"n": "SUMATERA BARAT", "v": 74.49}, {"n": "RIAU", "v": 74.79}, {"n": "JAMBI", "v": 73.43}, {"n": "SUMATERA SELATAN", "v": 72.3}, {"n": "BENGKULU", "v": 73.39}, {"n": "LAMPUNG", "v": 71.81}, {"n": "KEP. BANGKA BELITUNG", "v": 73.33}, {"n": "KEPULAUAN RIAU", "v": 77.97}, {"n": "DKI JAKARTA", "v": 83.08}, {"n": "JAWA BARAT", "v": 74.43}, {"n": "JAWA TENGAH", "v": 73.88}, {"n": "D I YOGYAKARTA", "v": 81.55}, {"n": "JAWA TIMUR", "v": 74.09}, {"n": "BANTEN", "v": 74.48}, {"n": "BALI", "v": 77.76}, {"n": "NUSA TENGGARA BARAT", "v": 70.93}, {"n": "NUSA TENGGARA TIMUR", "v": 67.39}, {"n": "KALIMANTAN BARAT", "v": 70.13}, {"n": "KALIMANTAN TENGAH", "v": 72.73}, {"n": "KALIMANTAN SELATAN", "v": 73.03}, {"n": "KALIMANTAN TIMUR", "v": 78.83}, {"n": "KALIMANTAN UTARA", "v": 73.02}, {"n": "SULAWESI UTARA", "v": 75.03}, {"n": "SULAWESI TENGAH", "v": 71.56}, {"n": "SULAWESI SELATAN", "v": 74.05}, {"n": "SULAWESI TENGGARA", "v": 73.48}, {"n": "GORONTALO", "v": 71.23}, {"n": "SULAWESI BARAT", "v": 68.2}, {"n": "MALUKU", "v": 71.57}, {"n": "MALUKU UTARA", "v": 71.03}, {"n": "PAPUA BARAT", "v": 67.02}, {"n": "PAPUA BARAT DAYA", "v": 68.63}, {"n": "PAPUA", "v": 73.0}, {"n": "PAPUA SELATAN", "v": 67.9}, {"n": "PAPUA TENGAH", "v": 59.75}, {"n": "PAPUA PEGUNUNGAN", "v": 53.42}], "kabkota": [{"n": "Simeulue", "v": 69.01}, {"n": "Aceh Singkil", "v": 70.75}, {"n": "Aceh Selatan", "v": 69.1}, {"n": "Aceh Tenggara", "v": 71.7}, {"n": "Aceh Timur", "v": 69.87}, {"n": "Aceh Tengah", "v": 75.41}, {"n": "Aceh Barat", "v": 73.69}, {"n": "Aceh Besar", "v": 75.13}, {"n": "Pidie", "v": 72.31}, {"n": "Bireuen", "v": 74.45}, {"n": "Aceh Utara", "v": 71.7}, {"n": "Aceh Barat Daya", "v": 68.75}, {"n": "Gayo Lues", "v": 69.83}, {"n": "Aceh Tamiang", "v": 72.32}, {"n": "Nagan Raya", "v": 71.72}, {"n": "Aceh Jaya", "v": 71.83}, {"n": "Bener Meriah", "v": 75.01}, {"n": "Pidie Jaya", "v": 75.16}, {"n": "Kota Banda Aceh", "v": 87.17}, {"n": "Kota Sabang", "v": 78.32}, {"n": "Kota Langsa", "v": 78.81}, {"n": "Kota Lhokseumawe", "v": 79.55}, {"n": "Kota Subulussalam", "v": 68.04}, {"n": "Nias", "v": 65.55}, {"n": "Mandailing Natal", "v": 69.33}, {"n": "Tapanuli Selatan", "v": 72.14}, {"n": "Tapanuli Tengah", "v": 71.52}, {"n": "Tapanuli Utara", "v": 75.23}, {"n": "Toba Samosir / Toba", "v": 76.91}, {"n": "Labuhan Batu", "v": 74.18}, {"n": "Asahan", "v": 72.09}, {"n": "Simalungun", "v": 74.97}, {"n": "Dairi", "v": 73.92}, {"n": "Karo", "v": 76.55}, {"n": "Deli Serdang", "v": 76.92}, {"n": "Langkat", "v": 72.73}, {"n": "Nias Selatan", "v": 65.02}, {"n": "Humbang Hasundutan", "v": 71.59}, {"n": "Pakpak Bharat", "v": 70.36}, {"n": "Samosir", "v": 72.88}, {"n": "Serdang Bedagai", "v": 72.47}, {"n": "Batu Bara", "v": 70.83}, {"n": "Padang Lawas Utara", "v": 72.32}, {"n": "Padang Lawas", "v": 71.27}, {"n": "Labuhan Batu Selatan", "v": 73.67}, {"n": "Labuhan Batu Utara", "v": 74.4}, {"n": "Nias Utara", "v": 65.62}, {"n": "Nias Barat", "v": 64.67}, {"n": "Kota Sibolga", "v": 75.66}, {"n": "Kota Tanjung Balai", "v": 71.1}, {"n": "Kota Pematang Siantar", "v": 81.17}, {"n": "Kota Tebing Tinggi", "v": 77.45}, {"n": "Kota Medan", "v": 82.76}, {"n": "Kota Binjai", "v": 78.1}, {"n": "Kota Padangsidimpuan", "v": 76.96}, {"n": "Kota Gunungsitoli", "v": 71.41}, {"n": "Kepulauan Mentawai", "v": 63.99}, {"n": "Pesisir Selatan", "v": 72.02}, {"n": "Solok", "v": 71.02}, {"n": "Sijunjung", "v": 70.23}, {"n": "Tanah Datar", "v": 74.9}, {"n": "Padang Pariaman", "v": 73.1}, {"n": "Agam", "v": 74.66}, {"n": "Lima Puluh Kota", "v": 71.14}, {"n": "Pasaman", "v": 68.89}, {"n": "Solok Selatan", "v": 71.5}, {"n": "Dharmasraya", "v": 74.06}, {"n": "Pasaman Barat", "v": 70.93}, {"n": "Kota Padang", "v": 83.99}, {"n": "Kota Solok", "v": 80.0}, {"n": "Kota Sawah Lunto", "v": 75.13}, {"n": "Kota Padang Panjang", "v": 80.17}, {"n": "Kota Bukittinggi", "v": 82.51}, {"n": "Kota Payakumbuh", "v": 80.61}, {"n": "Kota Pariaman", "v": 78.88}, {"n": "Kuantan Singingi", "v": 72.33}, {"n": "Indragiri Hulu", "v": 71.48}, {"n": "Indragiri Hilir", "v": 68.38}, {"n": "Pelalawan", "v": 74.08}, {"n": "Siak", "v": 75.45}, {"n": "Kampar", "v": 74.85}, {"n": "Rokan Hulu", "v": 71.82}, {"n": "Bengkalis", "v": 75.28}, {"n": "Rokan Hilir", "v": 71.2}, {"n": "Kepulauan Meranti", "v": 67.92}, {"n": "Kota Pekanbaru", "v": 82.89}, {"n": "Kota Dumai", "v": 76.19}, {"n": "Kerinci", "v": 73.11}, {"n": "Merangin", "v": 71.66}, {"n": "Sarolangun", "v": 72.01}, {"n": "Batang Hari", "v": 71.67}, {"n": "Muaro Jambi", "v": 71.91}, {"n": "Tanjung Jabung Timur", "v": 67.54}, {"n": "Tanjung Jabung Barat", "v": 69.93}, {"n": "Tebo", "v": 71.32}, {"n": "Bungo", "v": 71.92}, {"n": "Kota Jambi", "v": 81.04}, {"n": "Kota Sungai Penuh", "v": 77.4}, {"n": "Ogan Komering Ulu", "v": 71.55}, {"n": "Ogan Komering Ilir", "v": 69.33}, {"n": "Muara Enim", "v": 71.0}, {"n": "Lahat", "v": 69.77}, {"n": "Musi Rawas", "v": 68.95}, {"n": "Musi Banyuasin", "v": 70.12}, {"n": "Banyu Asin", "v": 69.51}, {"n": "Ogan Komering Ulu Selatan", "v": 67.65}, {"n": "Ogan Komering Ulu Timur", "v": 71.55}, {"n": "Ogan Ilir", "v": 69.4}, {"n": "Empat Lawang", "v": 67.25}, {"n": "Penukal Abab Lematang Ilir", "v": 67.48}, {"n": "Musi Rawas Utara", "v": 67.4}, {"n": "Kota Palembang", "v": 80.57}, {"n": "Kota Prabumulih", "v": 77.08}, {"n": "Kota Pagar Alam", "v": 71.19}, {"n": "Kota Lubuklinggau", "v": 76.82}, {"n": "Bengkulu Selatan", "v": 72.35}, {"n": "Rejang Lebong", "v": 72.92}, {"n": "Bengkulu Utara", "v": 71.11}, {"n": "Kaur", "v": 68.98}, {"n": "Seluma", "v": 68.97}, {"n": "Mukomuko", "v": 70.63}, {"n": "Lebong", "v": 69.27}, {"n": "Kepahiang", "v": 70.27}, {"n": "Bengkulu Tengah", "v": 69.84}, {"n": "Kota Bengkulu", "v": 82.04}, {"n": "Lampung Barat", "v": 69.84}, {"n": "Tanggamus", "v": 68.52}, {"n": "Lampung Selatan", "v": 70.28}, {"n": "Lampung Timur", "v": 71.84}, {"n": "Lampung Tengah", "v": 72.37}, {"n": "Lampung Utara", "v": 69.62}, {"n": "Way Kanan", "v": 69.31}, {"n": "Tulangbawang", "v": 70.66}, {"n": "Pesawaran", "v": 68.52}, {"n": "Pringsewu", "v": 72.29}, {"n": "Mesuji", "v": 66.46}, {"n": "Tulang Bawang Barat", "v": 68.46}, {"n": "Pesisir Barat", "v": 66.73}, {"n": "Kota Bandar Lampung", "v": 79.19}, {"n": "Kota Metro", "v": 78.93}, {"n": "Bangka", "v": 73.98}, {"n": "Belitung", "v": 74.47}, {"n": "Bangka Barat", "v": 70.67}, {"n": "Bangka Tengah", "v": 71.9}, {"n": "Bangka Selatan", "v": 68.86}, {"n": "Belitung Timur", "v": 73.19}, {"n": "Kota Pangkal Pinang", "v": 80.4}, {"n": "Karimun", "v": 74.28}, {"n": "Bintan", "v": 76.18}, {"n": "Natuna", "v": 74.56}, {"n": "Lingga", "v": 68.19}, {"n": "Kepulauan Anambas", "v": 70.93}, {"n": "Kota Batam", "v": 82.86}, {"n": "Kota Tanjung Pinang", "v": 80.63}, {"n": "Kep. Seribu", "v": 74.17}, {"n": "Kota Jakarta Selatan", "v": 86.94}, {"n": "Kota Jakarta Timur", "v": 84.65}, {"n": "Kota Jakarta Pusat", "v": 83.01}, {"n": "Kota Jakarta Barat", "v": 83.64}, {"n": "Kota Jakarta Utara", "v": 81.39}, {"n": "Bogor", "v": 72.39}, {"n": "Sukabumi", "v": 68.97}, {"n": "Cianjur", "v": 67.24}, {"n": "Bandung", "v": 74.27}, {"n": "Garut", "v": 68.79}, {"n": "Tasikmalaya", "v": 68.36}, {"n": "Ciamis", "v": 72.56}, {"n": "Kuningan", "v": 71.26}, {"n": "Cirebon", "v": 71.44}, {"n": "Majalengka", "v": 69.74}, {"n": "Sumedang", "v": 73.73}, {"n": "Indramayu", "v": 69.83}, {"n": "Subang", "v": 71.36}, {"n": "Purwakarta", "v": 72.65}, {"n": "Karawang", "v": 72.9}, {"n": "Bekasi", "v": 76.44}, {"n": "Bandung Barat", "v": 70.03}, {"n": "Pangandaran", "v": 69.85}, {"n": "Kota Bogor", "v": 78.52}, {"n": "Kota Sukabumi", "v": 76.85}, {"n": "Kota Bandung", "v": 83.52}, {"n": "Kota Cirebon", "v": 77.08}, {"n": "Kota Bekasi", "v": 83.54}, {"n": "Kota Depok", "v": 82.91}, {"n": "Kota Cimahi", "v": 80.08}, {"n": "Kota Tasikmalaya", "v": 75.04}, {"n": "Kota Banjar", "v": 73.64}, {"n": "Cilacap", "v": 72.38}, {"n": "Banyumas", "v": 74.52}, {"n": "Purbalingga", "v": 70.69}, {"n": "Banjarnegara", "v": 69.6}, {"n": "Kebumen", "v": 71.93}, {"n": "Purworejo", "v": 75.11}, {"n": "Wonosobo", "v": 69.82}, {"n": "Magelang", "v": 71.99}, {"n": "Boyolali", "v": 75.96}, {"n": "Klaten", "v": 78.16}, {"n": "Sukoharjo", "v": 79.3}, {"n": "Wonogiri", "v": 72.55}, {"n": "Karanganyar", "v": 78.11}, {"n": "Sragen", "v": 75.53}, {"n": "Grobogan", "v": 72.02}, {"n": "Blora", "v": 71.39}, {"n": "Rembang", "v": 72.53}, {"n": "Pati", "v": 74.1}, {"n": "Kudus", "v": 77.22}, {"n": "Jepara", "v": 74.32}, {"n": "Demak", "v": 74.57}, {"n": "Semarang", "v": 75.67}, {"n": "Temanggung", "v": 71.87}, {"n": "Kendal", "v": 74.34}, {"n": "Batang", "v": 70.74}, {"n": "Pekalongan", "v": 71.84}, {"n": "Pemalang", "v": 68.55}, {"n": "Tegal", "v": 70.77}, {"n": "Brebes", "v": 68.46}, {"n": "Kota Magelang", "v": 82.15}, {"n": "Kota Surakarta", "v": 84.4}, {"n": "Kota Salatiga", "v": 85.72}, {"n": "Kota Semarang", "v": 85.25}, {"n": "Kota Pekalongan", "v": 77.22}, {"n": "Kota Tegal", "v": 77.43}, {"n": "Kulon Progo", "v": 76.14}, {"n": "Bantul", "v": 81.74}, {"n": "Gunung Kidul", "v": 71.89}, {"n": "Sleman", "v": 85.61}, {"n": "Kota Yogyakarta", "v": 88.77}, {"n": "Pacitan", "v": 70.74}, {"n": "Ponorogo", "v": 73.01}, {"n": "Trenggalek", "v": 72.24}, {"n": "Tulungagung", "v": 75.09}, {"n": "Blitar", "v": 73.09}, {"n": "Kediri", "v": 74.44}, {"n": "Malang", "v": 72.68}, {"n": "Lumajang", "v": 68.8}, {"n": "Jember", "v": 69.15}, {"n": "Banyuwangi", "v": 73.11}, {"n": "Bondowoso", "v": 68.65}, {"n": "Situbondo", "v": 69.75}, {"n": "Probolinggo", "v": 68.29}, {"n": "Pasuruan", "v": 70.73}, {"n": "Sidoarjo", "v": 82.31}, {"n": "Mojokerto", "v": 75.98}, {"n": "Jombang", "v": 75.1}, {"n": "Nganjuk", "v": 74.23}, {"n": "Madiun", "v": 73.74}, {"n": "Magetan", "v": 75.87}, {"n": "Ngawi", "v": 73.09}, {"n": "Bojonegoro", "v": 71.78}, {"n": "Tuban", "v": 71.23}, {"n": "Lamongan", "v": 75.13}, {"n": "Gresik", "v": 78.45}, {"n": "Bangkalan", "v": 66.27}, {"n": "Sampang", "v": 64.65}, {"n": "Pamekasan", "v": 68.49}, {"n": "Sumenep", "v": 69.26}, {"n": "Kota Kediri", "v": 81.35}, {"n": "Kota Blitar", "v": 81.27}, {"n": "Kota Malang", "v": 84.06}, {"n": "Kota Probolinggo", "v": 76.27}, {"n": "Kota Pasuruan", "v": 77.75}, {"n": "Kota Mojokerto", "v": 80.92}, {"n": "Kota Madiun", "v": 83.48}, {"n": "Kota Surabaya", "v": 84.14}, {"n": "Kota Batu", "v": 78.79}, {"n": "Pandeglang", "v": 66.99}, {"n": "Lebak", "v": 65.86}, {"n": "Tangerang", "v": 74.09}, {"n": "Serang", "v": 69.03}, {"n": "Kota Tangerang", "v": 80.02}, {"n": "Kota Cilegon", "v": 75.14}, {"n": "Kota Serang", "v": 73.99}, {"n": "Kota Tangerang Selatan", "v": 82.89}, {"n": "Jembrana", "v": 74.6}, {"n": "Tabanan", "v": 78.42}, {"n": "Badung", "v": 83.87}, {"n": "Gianyar", "v": 79.82}, {"n": "Klungkung", "v": 74.04}, {"n": "Bangli", "v": 71.34}, {"n": "Karangasem", "v": 69.74}, {"n": "Buleleng", "v": 74.52}, {"n": "Kota Denpasar", "v": 85.22}, {"n": "Lombok Barat", "v": 70.67}, {"n": "Lombok Tengah", "v": 69.17}, {"n": "Lombok Timur", "v": 69.23}, {"n": "Sumbawa", "v": 70.55}, {"n": "Dompu", "v": 70.78}, {"n": "Bima", "v": 68.94}, {"n": "Sumbawa Barat", "v": 73.86}, {"n": "Lombok Utara", "v": 67.24}, {"n": "Kota Mataram", "v": 80.6}, {"n": "Kota Bima", "v": 78.04}, {"n": "Sumba Barat", "v": 66.06}, {"n": "Sumba Timur", "v": 67.68}, {"n": "Kupang", "v": 66.57}, {"n": "Timor Tengah Selatan", "v": 64.36}, {"n": "Timor Tengah Utara", "v": 65.83}, {"n": "Belu", "v": 64.43}, {"n": "Alor", "v": 63.82}, {"n": "Lembata", "v": 66.62}, {"n": "Flores Timur", "v": 66.29}, {"n": "Sikka", "v": 67.41}, {"n": "Ende", "v": 69.11}, {"n": "Ngada", "v": 69.52}, {"n": "Manggarai", "v": 67.28}, {"n": "Rote Ndao", "v": 64.59}, {"n": "Manggarai Barat", "v": 66.65}, {"n": "Sumba Tengah", "v": 64.31}, {"n": "Sumba Barat Daya", "v": 64.27}, {"n": "Nagekeo", "v": 67.72}, {"n": "Manggarai Timur", "v": 64.2}, {"n": "Sabu Raijua", "v": 59.58}, {"n": "Malaka", "v": 62.73}, {"n": "Kota Kupang", "v": 81.08}, {"n": "Sambas", "v": 69.31}, {"n": "Bengkayang", "v": 70.3}, {"n": "Landak", "v": 69.08}, {"n": "Mempawah", "v": 68.56}, {"n": "Sanggau", "v": 68.43}, {"n": "Ketapang", "v": 69.42}, {"n": "Sintang", "v": 69.42}, {"n": "Kapuas Hulu", "v": 68.58}, {"n": "Sekadau", "v": 67.25}, {"n": "Melawi", "v": 68.66}, {"n": "Kayong Utara", "v": 65.74}, {"n": "Kubu Raya", "v": 70.25}, {"n": "Kota Pontianak", "v": 81.57}, {"n": "Kota Singkawang", "v": 73.87}, {"n": "Kotawaringin Barat", "v": 74.44}, {"n": "Kotawaringin Timur", "v": 72.66}, {"n": "Kapuas", "v": 71.32}, {"n": "Barito Selatan", "v": 72.36}, {"n": "Barito Utara", "v": 72.31}, {"n": "Sukamara", "v": 69.85}, {"n": "Lamandau", "v": 72.25}, {"n": "Seruyan", "v": 69.05}, {"n": "Katingan", "v": 70.7}, {"n": "Pulang Pisau", "v": 70.27}, {"n": "Gunung Mas", "v": 72.73}, {"n": "Barito Timur", "v": 73.26}, {"n": "Murung Raya", "v": 70.03}, {"n": "Kota Palangka Raya", "v": 82.2}, {"n": "Tanah Laut", "v": 71.43}, {"n": "Kotabaru", "v": 70.61}, {"n": "Banjar", "v": 71.87}, {"n": "Barito Kuala", "v": 68.84}, {"n": "Tapin", "v": 72.51}, {"n": "Hulu Sungai Selatan", "v": 71.21}, {"n": "Hulu Sungai Tengah", "v": 70.69}, {"n": "Hulu Sungai Utara", "v": 68.28}, {"n": "Tabalong", "v": 74.41}, {"n": "Tanah Bumbu", "v": 72.95}, {"n": "Balangan", "v": 71.34}, {"n": "Kota Banjarmasin", "v": 79.05}, {"n": "Kota Banjar Baru", "v": 80.51}, {"n": "Paser", "v": 74.7}, {"n": "Kutai Barat", "v": 74.5}, {"n": "Kutai Kartanegara", "v": 75.91}, {"n": "Kutai Timur", "v": 75.53}, {"n": "Berau", "v": 76.66}, {"n": "Penajam Paser Utara", "v": 73.9}, {"n": "Mahakam Ulu", "v": 70.35}, {"n": "Kota Balikpapan", "v": 82.24}, {"n": "Kota Samarinda", "v": 82.81}, {"n": "Kota Bontang", "v": 82.42}, {"n": "Malinau", "v": 73.9}, {"n": "Bulungan", "v": 73.34}, {"n": "Tana Tidung", "v": 70.08}, {"n": "Nunukan", "v": 68.52}, {"n": "Kota Tarakan", "v": 77.96}, {"n": "Bolaang Mongondow", "v": 70.29}, {"n": "Minahasa", "v": 77.74}, {"n": "Kepulauan Sangihe", "v": 72.71}, {"n": "Kepulauan Talaud", "v": 71.77}, {"n": "Minahasa Selatan", "v": 74.17}, {"n": "Minahasa Utara", "v": 75.89}, {"n": "Bolaang Mongondow Utara", "v": 69.32}, {"n": "Siau Tagulandang Biaro", "v": 70.31}, {"n": "Minahasa Tenggara", "v": 72.66}, {"n": "Bolaang Mongondow Selatan", "v": 67.14}, {"n": "Bolaang Mongondow Timur", "v": 68.53}, {"n": "Kota Manado", "v": 80.63}, {"n": "Kota Bitung", "v": 75.71}, {"n": "Kota Tomohon", "v": 78.89}, {"n": "Kota Kotamobagu", "v": 75.27}, {"n": "Banggai Kepulauan", "v": 67.43}, {"n": "Banggai", "v": 72.32}, {"n": "Morowali", "v": 73.54}, {"n": "Poso", "v": 72.87}, {"n": "Donggala", "v": 67.45}, {"n": "Toli-Toli", "v": 68.37}, {"n": "Buol", "v": 70.28}, {"n": "Parigi Moutong", "v": 67.49}, {"n": "Tojo Una-Una", "v": 66.97}, {"n": "Sigi", "v": 70.51}, {"n": "Banggai Laut", "v": 67.43}, {"n": "Morowali Utara", "v": 70.58}, {"n": "Kota Palu", "v": 82.88}, {"n": "Kepulauan Selayar", "v": 70.03}, {"n": "Bulukumba", "v": 71.97}, {"n": "Bantaeng", "v": 71.48}, {"n": "Jeneponto", "v": 66.38}, {"n": "Takalar", "v": 69.47}, {"n": "Gowa", "v": 72.26}, {"n": "Sinjai", "v": 69.52}, {"n": "Maros", "v": 72.11}, {"n": "Pangkajene dan Kepulauan", "v": 71.22}, {"n": "Barru", "v": 73.06}, {"n": "Bone", "v": 68.36}, {"n": "Soppeng", "v": 71.39}, {"n": "Wajo", "v": 71.52}, {"n": "Sidenreng Rappang", "v": 73.21}, {"n": "Pinrang", "v": 73.55}, {"n": "Enrekang", "v": 74.61}, {"n": "Luwu", "v": 72.79}, {"n": "Tana Toraja", "v": 71.67}, {"n": "Luwu Utara", "v": 72.07}, {"n": "Luwu Timur", "v": 74.95}, {"n": "Toraja Utara", "v": 71.85}, {"n": "Kota Makasar", "v": 83.9}, {"n": "Kota Parepare", "v": 79.64}, {"n": "Kota Palopo", "v": 79.94}, {"n": "Buton", "v": 68.88}, {"n": "Muna", "v": 71.05}, {"n": "Konawe", "v": 73.39}, {"n": "Kolaka", "v": 75.18}, {"n": "Konawe Selatan", "v": 71.19}, {"n": "Bombana", "v": 68.15}, {"n": "Wakatobi", "v": 72.02}, {"n": "Kolaka Utara", "v": 71.7}, {"n": "Buton Utara", "v": 70.6}, {"n": "Konawe Utara", "v": 72.32}, {"n": "Kolaka Timur", "v": 70.27}, {"n": "Konawe Kepulauan", "v": 67.99}, {"n": "Muna Barat", "v": 68.06}, {"n": "Buton Tengah", "v": 66.47}, {"n": "Buton Selatan", "v": 67.0}, {"n": "Kota Kendari", "v": 85.33}, {"n": "Kota Baubau", "v": 78.13}, {"n": "Boalemo", "v": 68.74}, {"n": "Gorontalo", "v": 69.66}, {"n": "Pohuwato", "v": 68.02}, {"n": "Bone Bolango", "v": 72.38}, {"n": "Gorontalo Utara", "v": 67.46}, {"n": "Kota Gorontalo", "v": 79.18}, {"n": "Majene", "v": 69.42}, {"n": "Polewali Mandar", "v": 66.22}, {"n": "Mamasa", "v": 68.37}, {"n": "Mamuju", "v": 70.4}, {"n": "Mamuju Utara / Pasangkayu", "v": 69.73}, {"n": "Mamuju Tengah", "v": 68.36}, {"n": "Maluku Tenggara Barat / Kepulauan Tanimbar", "v": 64.83}, {"n": "Maluku Tenggara", "v": 68.24}, {"n": "Maluku Tengah", "v": 73.21}, {"n": "Buru", "v": 71.01}, {"n": "Kepulauan Aru", "v": 65.83}, {"n": "Seram Bagian Barat", "v": 68.39}, {"n": "Seram Bagian Timur", "v": 66.24}, {"n": "Maluku Barat Daya", "v": 64.86}, {"n": "Buru Selatan", "v": 67.09}, {"n": "Kota Ambon", "v": 82.56}, {"n": "Kota Tual", "v": 70.21}, {"n": "Halmahera Barat", "v": 67.53}, {"n": "Halmahera Tengah", "v": 68.45}, {"n": "Kepulauan Sula", "v": 65.99}, {"n": "Halmahera Selatan", "v": 66.66}, {"n": "Halmahera Utara", "v": 69.78}, {"n": "Halmahera Timur", "v": 69.58}, {"n": "Pulau Morotai", "v": 65.68}, {"n": "Pulau Taliabu", "v": 62.9}, {"n": "Kota Ternate", "v": 82.12}, {"n": "Kota Tidore Kepulauan", "v": 72.91}, {"n": "Fakfak", "v": 70.39}, {"n": "Kaimana", "v": 67.6}, {"n": "Teluk Wondama", "v": 62.36}, {"n": "Teluk Bintuni", "v": 66.75}, {"n": "Manokwari", "v": 73.83}, {"n": "Manokwari Selatan", "v": 62.45}, {"n": "Pegunungan Arfak", "v": 58.73}, {"n": "Raja Ampat", "v": 65.86}, {"n": "Sorong", "v": 68.29}, {"n": "Sorong Selatan", "v": 64.5}, {"n": "Maybrat", "v": 61.83}, {"n": "Tambrauw", "v": 56.32}, {"n": "Kota Sorong", "v": 79.93}, {"n": "Jayapura", "v": 74.11}, {"n": "Kepulauan Yapen", "v": 69.65}, {"n": "Biak Numfor", "v": 73.98}, {"n": "Sarmi", "v": 66.72}, {"n": "Keerom", "v": 68.68}, {"n": "Waropen", "v": 66.92}, {"n": "Supiori", "v": 65.15}, {"n": "Mamberamo Raya", "v": 55.0}, {"n": "Kota Jayapura", "v": 81.67}, {"n": "Merauke", "v": 72.73}, {"n": "Boven Digoel", "v": 64.26}, {"n": "Mappi", "v": 61.51}, {"n": "Asmat", "v": 53.92}, {"n": "Mimika", "v": 76.85}, {"n": "Dogiyai", "v": 57.68}, {"n": "Deiyai", "v": 52.07}, {"n": "Nabire", "v": 71.77}, {"n": "Paniai", "v": 58.69}, {"n": "Intan Jaya", "v": 50.71}, {"n": "Puncak", "v": 45.6}, {"n": "Puncak Jaya", "v": 51.78}, {"n": "Nduga", "v": 36.3}, {"n": "Jayawijaya", "v": 61.03}, {"n": "Lanny Jaya", "v": 51.59}, {"n": "Tolikara", "v": 52.05}, {"n": "Mamberamo Tengah", "v": 50.72}, {"n": "Yalimo", "v": 51.85}, {"n": "Yahukimo", "v": 51.98}, {"n": "Pegunungan Bintang", "v": 49.36}]};
+
+/* =========================================================
+   K-MEANS (1D) + SILHOUETTE
+   ========================================================= */
+function kmeans1d(points, k, maxIter = 100) {
+  const values = points.map(p => p.v);
+  const n = values.length;
+  k = Math.min(k, n);
+  const sorted = [...values].sort((a, b) => a - b);
+  let centroids = [];
+  for (let i = 0; i < k; i++) {
+    const idx = Math.floor((i + 0.5) * n / k);
+    centroids.push(sorted[Math.min(idx, n - 1)]);
+  }
+  let assign = new Array(n).fill(0);
+  for (let iter = 0; iter < maxIter; iter++) {
+    let changed = false;
+    for (let i = 0; i < n; i++) {
+      let best = 0, bestD = Infinity;
+      for (let c = 0; c < k; c++) {
+        const d = Math.abs(values[i] - centroids[c]);
+        if (d < bestD) { bestD = d; best = c; }
+      }
+      if (assign[i] !== best) { assign[i] = best; changed = true; }
+    }
+    const sums = new Array(k).fill(0);
+    const counts = new Array(k).fill(0);
+    for (let i = 0; i < n; i++) { sums[assign[i]] += values[i]; counts[assign[i]]++; }
+    for (let c = 0; c < k; c++) if (counts[c] > 0) centroids[c] = sums[c] / counts[c];
+    if (!changed) break;
+  }
+  const order = centroids.map((c, i) => i).sort((a, b) => centroids[a] - centroids[b]);
+  const rank = new Array(k);
+  order.forEach((origId, newRank) => { rank[origId] = newRank; });
+  const newAssign = assign.map(a => rank[a]);
+  const newCentroids = order.map(i => centroids[i]);
+  return { assign: newAssign, centroids: newCentroids, k };
+}
+
+function silhouetteAvg(points, assign, k) {
+  const n = points.length;
+  if (k <= 1 || n <= k) return 0;
+  const values = points.map(p => p.v);
+  const byCluster = Array.from({ length: k }, () => []);
+  values.forEach((v, i) => byCluster[assign[i]].push(v));
+  let total = 0, counted = 0;
+  for (let i = 0; i < n; i++) {
+    const ci = assign[i];
+    const same = byCluster[ci];
+    let a = 0;
+    if (same.length > 1) {
+      let s = 0;
+      for (const v of same) s += Math.abs(v - values[i]);
+      a = s / (same.length - 1);
+    }
+    let b = Infinity;
+    for (let c = 0; c < k; c++) {
+      if (c === ci || byCluster[c].length === 0) continue;
+      let s = 0;
+      for (const v of byCluster[c]) s += Math.abs(v - values[i]);
+      const avg = s / byCluster[c].length;
+      if (avg < b) b = avg;
+    }
+    if (!isFinite(b)) continue;
+    const denom = Math.max(a, b);
+    const s = denom === 0 ? 0 : (b - a) / denom;
+    total += s; counted++;
+  }
+  return counted ? total / counted : 0;
+}
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+const PALETTE = ['#223559','#2E5478','#3E7A82','#4F8F6E','#7C9A4C','#B08F3D','#C97C3B','#B8502F'];
+
+function hexToRgb(hex){
+  const h = hex.replace('#','');
+  return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)];
+}
+function rgbToHex(r,g,b){
+  return '#' + [r,g,b].map(v => Math.round(v).toString(16).padStart(2,'0')).join('');
+}
+function lerpColor(c1, c2, t){
+  const a = hexToRgb(c1), b = hexToRgb(c2);
+  return rgbToHex(a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t, a[2]+(b[2]-a[2])*t);
+}
+function clusterColor(i, k){
+  if (k <= 1) return PALETTE[3];
+  const t = i/(k-1);
+  const idx = t*(PALETTE.length-1);
+  const lo = Math.floor(idx), hi = Math.min(PALETTE.length-1, Math.ceil(idx)), f = idx-lo;
+  return lerpColor(PALETTE[lo], PALETTE[hi], f);
+}
+function bpsCategory(v){
+  if (v >= 80) return 'Sangat Tinggi';
+  if (v >= 70) return 'Tinggi';
+  if (v >= 60) return 'Sedang';
+  return 'Rendah';
+}
+function quantile(sortedArr, q){
+  const pos = (sortedArr.length - 1) * q;
+  const base = Math.floor(pos), rest = pos - base;
+  if (sortedArr[base+1] !== undefined) return sortedArr[base] + rest*(sortedArr[base+1]-sortedArr[base]);
+  return sortedArr[base];
+}
+function fmt1(v){ return v.toLocaleString('id-ID', {minimumFractionDigits:1, maximumFractionDigits:1}); }
+function fmt2(v){ return v.toLocaleString('id-ID', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const state = {
+  level: 'kabkota',
+  k: 4,
+  search: '',
+  sortKey: 'v',
+  sortDir: 'desc',
+  activeCluster: null
+};
+
+let current = null; // holds computed {points, assign, centroids, k, stats}
+
+/* =========================================================
+   COMPUTE
+   ========================================================= */
+function computeCurrent(){
+  const points = DATA[state.level];
+  const k = Math.min(state.k, points.length);
+  const { assign, centroids } = kmeans1d(points, k);
+  const sil = silhouetteAvg(points, assign, k);
+
+  const clusters = Array.from({length:k}, (_,i) => ({
+    id:i, color: clusterColor(i,k), values: [], names: []
+  }));
+  points.forEach((p,i) => {
+    clusters[assign[i]].values.push(p.v);
+    clusters[assign[i]].names.push(p.n);
+  });
+  clusters.forEach(c => {
+    const sorted = [...c.values].sort((a,b)=>a-b);
+    c.n = sorted.length;
+    c.min = sorted[0]; c.max = sorted[sorted.length-1];
+    c.q1 = quantile(sorted, .25); c.median = quantile(sorted,.5); c.q3 = quantile(sorted,.75);
+    c.mean = c.values.reduce((a,b)=>a+b,0)/c.n;
+    c.category = bpsCategory(c.mean);
+    let topIdx = 0, botIdx = 0;
+    c.values.forEach((v,i)=>{ if (v>c.values[topIdx]) topIdx=i; if (v<c.values[botIdx]) botIdx=i; });
+    c.topName = c.names[topIdx]; c.topVal = c.values[topIdx];
+    c.botName = c.names[botIdx]; c.botVal = c.values[botIdx];
+  });
+
+  current = { points, assign, k, sil, clusters };
+}
+
+function silhouetteCurve(){
+  const points = DATA[state.level];
+  const maxK = Math.min(8, points.length);
+  const out = [];
+  for (let k=2; k<=maxK; k++){
+    const { assign } = kmeans1d(points, k);
+    out.push({ k, sil: silhouetteAvg(points, assign, k) });
+  }
+  return out;
+}
+
+/* =========================================================
+   RENDER: distribution chart (dot histogram + box plots)
+   ========================================================= */
+function renderChart(){
+  const host = document.getElementById('chartHost');
+  const { points, assign, k, clusters } = current;
+
+  const vMin = Math.min(...points.map(p=>p.v));
+  const vMax = Math.max(...points.map(p=>p.v));
+  const pad = (vMax - vMin) * 0.06 || 2;
+  const domain = [Math.floor(vMin - pad), Math.ceil(vMax + pad)];
+
+  const marginL = 148, marginR = 28, plotW = 900;
+  const width = marginL + plotW + marginR;
+  const xScale = v => marginL + (v - domain[0]) / (domain[1]-domain[0]) * plotW;
+
+  // --- dot histogram bins ---
+  const isDense = points.length > 120;
+  const r = isDense ? 2.7 : 4.6;
+  const colW = r * 2;
+  const bins = new Map();
+  points.forEach((p,i) => {
+    const col = Math.round((xScale(p.v) - marginL) / colW);
+    if (!bins.has(col)) bins.set(col, []);
+    bins.get(col).push({ ...p, cluster: assign[i] });
+  });
+  let maxCount = 1;
+  bins.forEach(arr => { if (arr.length > maxCount) maxCount = arr.length; });
+  const rowH = Math.min(colW + 0.6, 210 / maxCount);
+  const dotR = Math.max(1.3, Math.min(r, rowH/2 - 0.25));
+  const dotAreaH = Math.max(46, maxCount * rowH);
+
+  const marginTop = 26;
+  const gap = 20;
+  const boxRowH = 25, boxGap = 7;
+  const boxAreaH = k*(boxRowH+boxGap);
+  const axisH = 30;
+  const totalH = marginTop + dotAreaH + gap + boxAreaH + axisH;
+
+  const dotBaseY = marginTop + dotAreaH;
+  const boxTop = dotBaseY + gap;
+
+  let svg = `<svg class="chart" viewBox="0 0 ${width} ${totalH}" xmlns="http://www.w3.org/2000/svg">`;
+
+  // boundary lines (midpoints between consecutive centroids)
+  const cents = clusters.map(c => c.mean).sort((a,b)=>a-b);
+  const boundaries = [];
+  for (let i=0;i<cents.length-1;i++) boundaries.push((cents[i]+cents[i+1])/2);
+  boundaries.forEach(b => {
+    const x = xScale(b);
+    svg += `<line x1="${x}" y1="${marginTop-8}" x2="${x}" y2="${boxTop+boxAreaH}" stroke="#B3A576" stroke-width="1" stroke-dasharray="3,4"/>`;
+  });
+
+  // nasional marker
+  if (DATA.nasional != null) {
+    const xn = xScale(DATA.nasional);
+    svg += `<line x1="${xn}" y1="${marginTop-14}" x2="${xn}" y2="${boxTop+boxAreaH}" stroke="#B9812E" stroke-width="1.4"/>`;
+    svg += `<text x="${xn}" y="${marginTop-18}" text-anchor="middle" font-family="SFMono-Regular,Consolas,monospace" font-size="9.5" fill="#7A5620">Nasional ${fmt1(DATA.nasional)}</text>`;
+  }
+
+  // dots
+  bins.forEach(arr => {
+    arr.forEach((p, i) => {
+      const cx = xScale(p.v);
+      const cy = dotBaseY - (i+0.5)*rowH;
+      const color = clusters[p.cluster].color;
+      svg += `<circle cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" r="${dotR.toFixed(1)}" fill="${color}" fill-opacity="0.88"><title>${escapeHtml(p.n)} — ${fmt2(p.v)}</title></circle>`;
+    });
+  });
+
+  // baseline
+  svg += `<line x1="${marginL}" y1="${dotBaseY}" x2="${marginL+plotW}" y2="${dotBaseY}" stroke="#C9BE9C" stroke-width="1"/>`;
+
+  // box plots per cluster
+  clusters.forEach((c, i) => {
+    const y = boxTop + i*(boxRowH+boxGap);
+    const cy = y + boxRowH/2;
+    const xMin = xScale(c.min), xMax = xScale(c.max), xQ1 = xScale(c.q1), xQ3 = xScale(c.q3), xMed = xScale(c.median);
+    svg += `<line x1="${xMin}" y1="${cy}" x2="${xMax}" y2="${cy}" stroke="${c.color}" stroke-width="1.4"/>`;
+    svg += `<line x1="${xMin}" y1="${cy-5}" x2="${xMin}" y2="${cy+5}" stroke="${c.color}" stroke-width="1.4"/>`;
+    svg += `<line x1="${xMax}" y1="${cy-5}" x2="${xMax}" y2="${cy+5}" stroke="${c.color}" stroke-width="1.4"/>`;
+    svg += `<rect x="${Math.min(xQ1,xQ3)}" y="${y+3}" width="${Math.max(2,Math.abs(xQ3-xQ1))}" height="${boxRowH-6}" fill="${c.color}" fill-opacity="0.28" stroke="${c.color}" stroke-width="1"/>`;
+    svg += `<line x1="${xMed}" y1="${y+3}" x2="${xMed}" y2="${y+boxRowH-3}" stroke="${c.color}" stroke-width="2"/>`;
+    svg += `<text x="${marginL-12}" y="${cy+4}" text-anchor="end" font-family="Georgia,serif" font-size="12.5" fill="${c.color}">Klaster ${i+1}</text>`;
+    svg += `<text x="${marginL-12}" y="${cy+16}" text-anchor="end" font-family="SFMono-Regular,Consolas,monospace" font-size="9" fill="#8B8873">n=${c.n}</text>`;
+  });
+
+  // axis ticks
+  const span = domain[1]-domain[0];
+  const step = span > 40 ? 10 : span > 20 ? 5 : 2;
+  const axisY = boxTop + boxAreaH + 14;
+  svg += `<line x1="${marginL}" y1="${boxTop+boxAreaH+4}" x2="${marginL+plotW}" y2="${boxTop+boxAreaH+4}" stroke="#C9BE9C" stroke-width="1"/>`;
+  for (let t = Math.ceil(domain[0]/step)*step; t <= domain[1]; t += step) {
+    const x = xScale(t);
+    svg += `<line x1="${x}" y1="${boxTop+boxAreaH+4}" x2="${x}" y2="${boxTop+boxAreaH+9}" stroke="#C9BE9C" stroke-width="1"/>`;
+    svg += `<text x="${x}" y="${axisY+8}" text-anchor="middle" font-family="SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B8873">${t}</text>`;
+  }
+  svg += `<text x="${marginL+plotW}" y="${axisY+22}" text-anchor="end" font-family="SFMono-Regular,Consolas,monospace" font-size="9.5" fill="#8B8873">skor IPM</text>`;
+
+  svg += `</svg>`;
+  host.innerHTML = svg;
+
+  // legend
+  const legend = document.getElementById('legendHost');
+  legend.innerHTML = clusters.map((c,i) =>
+    `<span><i style="background:${c.color}"></i>Klaster ${i+1} · ${c.category}</span>`
+  ).join('') + `<span><i class="nasional-mark"></i>Rata-rata nasional</span>`;
+}
+
+/* =========================================================
+   RENDER: cluster cards
+   ========================================================= */
+function renderCards(){
+  const host = document.getElementById('cardsHost');
+  host.innerHTML = current.clusters.map((c,i) => `
+    <div class="card ${state.activeCluster===i?'active':''}" style="--card-color:${c.color}" data-cluster="${i}">
+      <div class="card-top">
+        <span class="card-name">Klaster ${i+1}</span>
+        <span class="card-tag">${c.category}</span>
+      </div>
+      <div class="card-stat-row"><span>Jumlah wilayah</span><b>${c.n}</b></div>
+      <div class="card-stat-row"><span>Rata-rata IPM</span><b>${fmt2(c.mean)}</b></div>
+      <div class="card-stat-row"><span>Rentang</span><b>${fmt1(c.min)}–${fmt1(c.max)}</b></div>
+      <div class="card-extremes">
+        <div><span>Tertinggi</span><b>${escapeHtml(c.topName)} (${fmt1(c.topVal)})</b></div>
+        <div><span>Terendah</span><b>${escapeHtml(c.botName)} (${fmt1(c.botVal)})</b></div>
+      </div>
+    </div>
+  `).join('');
+
+  host.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.dataset.cluster, 10);
+      state.activeCluster = state.activeCluster === idx ? null : idx;
+      renderCards();
+      renderFilterChip();
+      renderTable();
+    });
+  });
+}
+
+function renderFilterChip(){
+  const chip = document.getElementById('filterChip');
+  if (state.activeCluster == null){ chip.classList.remove('show'); return; }
+  chip.classList.add('show');
+  document.getElementById('filterChipLabel').textContent = 'Klaster ' + (state.activeCluster+1);
+}
+
+/* =========================================================
+   RENDER: silhouette / elbow assist chart
+   ========================================================= */
+function renderElbow(){
+  const svgEl = document.getElementById('elbowChart');
+  const curve = silhouetteCurve();
+  const W = 520, H = 150, mL = 34, mR = 14, mT = 14, mB = 26;
+  const plotW = W-mL-mR, plotH = H-mT-mB;
+  const maxSil = Math.max(0.7, ...curve.map(d=>d.sil));
+  const xScale = k => mL + (k-2)/(8-2)*plotW;
+  const yScale = s => mT + plotH - (s/maxSil)*plotH;
+
+  let svg = '';
+  svg += `<line x1="${mL}" y1="${mT}" x2="${mL}" y2="${mT+plotH}" stroke="#C9BE9C"/>`;
+  svg += `<line x1="${mL}" y1="${mT+plotH}" x2="${mL+plotW}" y2="${mT+plotH}" stroke="#C9BE9C"/>`;
+  [0, .25, .5, .75].forEach(v => {
+    if (v>maxSil) return;
+    const y = yScale(v);
+    svg += `<line x1="${mL}" y1="${y}" x2="${mL+plotW}" y2="${y}" stroke="#E2D9BC" stroke-width="1"/>`;
+    svg += `<text x="${mL-6}" y="${y+3}" text-anchor="end" font-family="SFMono-Regular,Consolas,monospace" font-size="8.5" fill="#8B8873">${v.toFixed(2)}</text>`;
+  });
+  const path = curve.map((d,i) => `${i===0?'M':'L'} ${xScale(d.k)} ${yScale(d.sil)}`).join(' ');
+  svg += `<path d="${path}" fill="none" stroke="#B9812E" stroke-width="1.6"/>`;
+  curve.forEach(d => {
+    const isCurrent = d.k === state.k;
+    svg += `<circle cx="${xScale(d.k)}" cy="${yScale(d.sil)}" r="${isCurrent?5.5:3}" fill="${isCurrent?'#B9812E':'#1F2A44'}" stroke="#F7F3E6" stroke-width="${isCurrent?2:1}"/>`;
+    svg += `<text x="${xScale(d.k)}" y="${mT+plotH+16}" text-anchor="middle" font-family="SFMono-Regular,Consolas,monospace" font-size="9.5" fill="${isCurrent?'#7A5620':'#8B8873'}" font-weight="${isCurrent?'700':'400'}">${d.k}</text>`;
+  });
+  svgEl.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svgEl.innerHTML = svg;
+}
+
+/* =========================================================
+   RENDER: quality readout
+   ========================================================= */
+function renderQuality(){
+  const s = current.sil;
+  let label, color;
+  if (s > 0.5) { label = 'Kuat'; color = '#3E7A82'; }
+  else if (s > 0.25) { label = 'Cukup baik'; color = '#B08F3D'; }
+  else if (s > 0.0) { label = 'Lemah'; color = '#C97C3B'; }
+  else { label = 'Tumpang tindih'; color = '#B8502F'; }
+  document.getElementById('qualityLabel').textContent = label;
+  document.getElementById('qualityScore').textContent = fmt2(s);
+  document.getElementById('qualityDot').style.background = color;
+}
+
+/* =========================================================
+   RENDER: table
+   ========================================================= */
+function getTableRows(){
+  const { points, assign, clusters } = current;
+  let rows = points.map((p,i) => ({
+    n: p.n, v: p.v, c: assign[i], color: clusters[assign[i]].color, cat: bpsCategory(p.v)
+  }));
+  if (state.activeCluster != null) rows = rows.filter(r => r.c === state.activeCluster);
+  if (state.search.trim()) {
+    const q = state.search.trim().toLowerCase();
+    rows = rows.filter(r => r.n.toLowerCase().includes(q));
+  }
+  const dir = state.sortDir === 'asc' ? 1 : -1;
+  rows.sort((a,b) => {
+    let av = a[state.sortKey], bv = b[state.sortKey];
+    if (typeof av === 'string') { av = av.toLowerCase(); bv = bv.toLowerCase(); }
+    if (av < bv) return -1*dir;
+    if (av > bv) return 1*dir;
+    return 0;
+  });
+  return rows;
+}
+
+function renderTable(){
+  const rows = getTableRows();
+  const total = current.points.length;
+  document.getElementById('tableCount').textContent = `Menampilkan ${rows.length} dari ${total} wilayah`;
+
+  const body = document.getElementById('tableBody');
+  if (rows.length === 0) {
+    body.innerHTML = `<tr class="empty-row"><td colspan="4">Tidak ada wilayah yang cocok.</td></tr>`;
+  } else {
+    body.innerHTML = rows.map(r => `
+      <tr>
+        <td>${escapeHtml(r.n)}</td>
+        <td class="num">${fmt2(r.v)}</td>
+        <td class="badge-cell"><span class="row-badge" style="--row-color:${r.color}">Klaster ${r.c+1}</span></td>
+        <td class="cat-tag">${r.cat}</td>
+      </tr>
+    `).join('');
+  }
+
+  ['n','v','c','cat'].forEach(key => {
+    const el = document.getElementById('arrow-'+key);
+    el.textContent = state.sortKey === key ? (state.sortDir === 'asc' ? '▲' : '▼') : '';
+  });
+}
+
+/* =========================================================
+   EXPORT CSV
+   ========================================================= */
+function exportCsv(){
+  const rows = getTableRows();
+  const header = 'Wilayah,IPM_2024,Klaster,Kategori_BPS,Cakupan\n';
+  const body = rows.map(r => `"${r.n.replace(/"/g,'""')}",${r.v},${r.c+1},${r.cat},${state.level}`).join('\n');
+  const blob = new Blob([header+body], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `ipm_klaster_${state.level}_k${state.k}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* =========================================================
+   MASTER RENDER
+   ========================================================= */
+function renderAll(){
+  computeCurrent();
+  document.getElementById('chartTitle').textContent =
+    state.level === 'kabkota' ? `Sebaran ${current.points.length} kabupaten/kota` : `Sebaran ${current.points.length} provinsi`;
+  renderChart();
+  renderCards();
+  renderFilterChip();
+  renderElbow();
+  renderQuality();
+  renderTable();
+}
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+document.getElementById('levelToggle').addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  document.querySelectorAll('#levelToggle button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  state.level = btn.dataset.level;
+  state.activeCluster = null;
+  state.search = '';
+  document.getElementById('searchInput').value = '';
+  const maxK = state.level === 'provinsi' ? 8 : 8;
+  renderAll();
+});
+
+const kSlider = document.getElementById('kSlider');
+kSlider.addEventListener('input', () => {
+  state.k = parseInt(kSlider.value, 10);
+  document.getElementById('kValue').textContent = state.k;
+  state.activeCluster = null;
+  renderAll();
+});
+
+document.getElementById('searchInput').addEventListener('input', e => {
+  state.search = e.target.value;
+  renderTable();
+});
+
+document.getElementById('filterChipClear').addEventListener('click', () => {
+  state.activeCluster = null;
+  renderCards();
+  renderFilterChip();
+  renderTable();
+});
+
+document.querySelectorAll('thead th[data-key]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.key;
+    if (state.sortKey === key) { state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc'; }
+    else { state.sortKey = key; state.sortDir = key === 'n' ? 'asc' : 'desc'; }
+    renderTable();
+  });
+});
+
+document.getElementById('exportBtn').addEventListener('click', exportCsv);
+
+/* =========================================================
+   INIT
+   ========================================================= */
+renderAll();
+</script>
+</body>
+</html>
